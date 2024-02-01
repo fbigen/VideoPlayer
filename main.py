@@ -1,7 +1,12 @@
 import cv2
 
 def play_video(source):
-    cap = cv2.VideoCapture(0 if source == 'camera' else source)
+    if source == 'camera':
+        cap = cv2.VideoCapture(0) 
+    elif source == 'phone':
+        cap = cv2.VideoCapture('http://192.168.0.107:8080/video') 
+    else:
+        cap = cv2.VideoCapture(source) 
 
     if not cap.isOpened():
         print("Помилка. Не вдалося відкрити відео або камеру.")
@@ -20,5 +25,7 @@ def play_video(source):
 
     cap.release()
     cv2.destroyAllWindows()
-play_video('camera')
+
+
+play_video('phone')
 
